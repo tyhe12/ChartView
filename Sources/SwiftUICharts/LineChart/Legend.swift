@@ -35,7 +35,9 @@ struct Legend: View {
     }
     var stepHeight: CGFloat {
         let points = self.data.onlyPoints()
-        if let min = self.min, let max = self.max, min != max {
+        let min = self.min
+        let max = self.max
+        if (min != max) {
             if (min < 0){
                 return (frame.size.height-padding) / CGFloat(max - min)
             }else{
@@ -97,8 +99,8 @@ struct Legend: View {
         let points = self.data.onlyPoints()
         // guard let max = self.max ?? points.max() else { return nil }
         // guard let min = self.min ?? points.min() else { return nil }
-        guard let max = self.max
-        guard let min = self.min
+        let max = self.max
+        let min = self.min
         let step = Double(max - min)/4
         return [min+step * 0, min+step * 1, min+step * 2, min+step * 3, min+step * 4]
     }
