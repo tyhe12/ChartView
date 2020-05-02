@@ -30,7 +30,7 @@ public struct LineChartView: View {
             
         }
     }
-    let frame = CGSize(width: 180, height: 120)
+    // let frame = CGSize(width: 180, height: 120)
     private var rateValue: Int
     
     public init(data: [Double],
@@ -57,7 +57,7 @@ public struct LineChartView: View {
         ZStack(alignment: .center){
             RoundedRectangle(cornerRadius: 20)
                 .fill(self.colorScheme == .dark ? self.darkModeStyle.backgroundColor : self.style.backgroundColor)
-                .frame(width: frame.width, height: 240, alignment: .center)
+                .frame(width: self.formSize.width, height: 240, alignment: .center)
                 .shadow(color: self.style.dropShadowColor, radius: self.dropShadow ? 8 : 0)
             VStack(alignment: .leading){
                 if(!self.showIndicatorDot){
@@ -103,7 +103,7 @@ public struct LineChartView: View {
                         maxDataValue: .constant(nil)
                     )
                 }
-                .frame(width: frame.width, height: frame.height + 30)
+                .frame(width: self.formSize.width, height: self.formSize.height + 30)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .offset(x: 0, y: 0)
             }.frame(width: self.formSize.width, height: self.formSize.height)
@@ -112,7 +112,7 @@ public struct LineChartView: View {
         .onChanged({ value in
             self.touchLocation = value.location
             self.showIndicatorDot = true
-            self.getClosestDataPoint(toPoint: value.location, width:self.frame.width, height: self.frame.height)
+            self.getClosestDataPoint(toPoint: value.location, width:self.formSize.width, height: self.formSize.height)
         })
             .onEnded({ value in
                 self.showIndicatorDot = false
