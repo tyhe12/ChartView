@@ -17,6 +17,18 @@ struct Legend: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     let padding:CGFloat = 3
 
+    public init(data: ChartData,
+                frame: CGRect,
+                hideHorizontalLines: Bool,
+                min: Double? = nil,
+                max: Double? = nil) {
+        self.data = data
+        self.frame = frame
+        self.hideHorizontalLines = hideHorizontalLines
+        self.min = min
+        self.max = max
+    }
+
     var stepWidth: CGFloat {
         if data.points.count < 2 {
             return 0
