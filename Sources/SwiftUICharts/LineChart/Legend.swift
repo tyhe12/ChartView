@@ -10,6 +10,8 @@ import SwiftUI
 
 struct Legend: View {
     @ObservedObject var data: ChartData
+    @Binding var min: Double? = nil
+    @Binding var max: Double? = nil
     @Binding var frame: CGRect
     @Binding var hideHorizontalLines: Bool
     @Environment(\.colorScheme) var colorScheme: ColorScheme
@@ -23,7 +25,7 @@ struct Legend: View {
     }
     var stepHeight: CGFloat {
         let points = self.data.onlyPoints()
-        if let min = points.min(), let max = points.max(), min != max {
+        if let min = self.min ?? points.min(), let max = self.max ?? points.max(), min != max {
             if (min < 0){
                 return (frame.size.height-padding) / CGFloat(max - min)
             }else{
@@ -33,9 +35,9 @@ struct Legend: View {
         return 0
     }
     
-    var min: CGFloat {
+    var minFloat: CGFloat {
         let points = self.data.onlyPoints()
-        return CGFloat(points.min() ?? 0)
+        return CGFloat(self.min ?? (points.min() ?? 0))
     }
     
     var body: some View {
@@ -68,7 +70,7 @@ struct Legend: View {
     
     func getYposition(height: Int)-> CGFloat {
         if let legend = getYLegend() {
-            return (self.frame.height-((CGFloat(legend[height]) - min)*self.stepHeight))-(self.frame.height/2)
+            return (self.frame.height-((CGFloat(legend[height]) - minFloat)*self.stepHeight))-(self.frame.height/2)
         }
         return 0
        
@@ -76,15 +78,15 @@ struct Legend: View {
     
     func line(atHeight: CGFloat, width: CGFloat) -> Path {
         var hLine = Path()
-        hLine.move(to: CGPoint(x:5, y: (atHeight-min)*stepHeight))
-        hLine.addLine(to: CGPoint(x: width, y: (atHeight-min)*stepHeight))
+        hLine.move(to: CGPoint(x:5, y: (atHeight-minFloat)*stepHeight))
+        hLine.addLine(to: CGPoint(x: width, y: (atHeight-minFloat)*stepHeight))
         return hLine
     }
     
     func getYLegend() -> [Double]? {
         let points = self.data.onlyPoints()
-        guard let max = points.max() else { return nil }
-        guard let min = points.min() else { return nil }
+        guard let max = self.min ?? points.max() else { return nil }
+        guard let min = self.min ?? points.min() else { return nil }
         let step = Double(max - min)/4
         return [min+step * 0, min+step * 1, min+step * 2, min+step * 3, min+step * 4]
     }
