@@ -24,6 +24,8 @@ public struct LineView: View {
     @State private var opacity:Double = 0
     @State private var currentDataNumber: Double = 0
     @State private var hideHorizontalLines: Bool = false
+    @State private var min = 0
+    @State private var max = 100
     
     public init(data: [Double],
                 title: String? = nil,
@@ -68,8 +70,8 @@ public struct LineView: View {
                              frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - 30, height: reader.frame(in: .local).height)),
                              touchLocation: self.$indicatorLocation,
                              showIndicator: self.$hideHorizontalLines,
-                             minDataValue: 0,
-                             maxDataValue: 100,
+                             minDataValue: self.$min,
+                             maxDataValue: self.$max,
                              showBackground: false
                         )
                         .offset(x: 30, y: 0)
