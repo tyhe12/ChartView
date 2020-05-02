@@ -10,8 +10,8 @@ import SwiftUI
 
 struct Legend: View {
     @ObservedObject var data: ChartData
-    @Binding var min: Double? = nil
-    @Binding var max: Double? = nil
+    @Binding var min: Double?
+    @Binding var max: Double?
     @Binding var frame: CGRect
     @Binding var hideHorizontalLines: Bool
     @Environment(\.colorScheme) var colorScheme: ColorScheme
