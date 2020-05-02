@@ -15,6 +15,8 @@ public struct LineView: View {
     public var style: ChartStyle
     public var darkModeStyle: ChartStyle
     public var valueSpecifier:String
+    public var minData: Int?
+    public var maxData: Int?
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State private var showLegend = false
@@ -29,7 +31,9 @@ public struct LineView: View {
                 title: String? = nil,
                 legend: String? = nil,
                 style: ChartStyle = Styles.lineChartStyleOne,
-                valueSpecifier: String? = "%.1f") {
+                valueSpecifier: String? = "%.1f", 
+                min: Int? = nil,
+                max: Int? = nil) {
         
         self.data = ChartData(points: data)
         self.title = title
@@ -37,6 +41,8 @@ public struct LineView: View {
         self.style = style
         self.valueSpecifier = valueSpecifier!
         self.darkModeStyle = style.darkModeStyle != nil ? style.darkModeStyle! : Styles.lineViewDarkMode
+        self.minData = min
+        self.maxData = max
     }
     
     public var body: some View {
@@ -68,8 +74,8 @@ public struct LineView: View {
                              frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - 30, height: reader.frame(in: .local).height)),
                              touchLocation: self.$indicatorLocation,
                              showIndicator: self.$hideHorizontalLines,
-                             minDataValue: .constant(nil),
-                             maxDataValue: .constant(nil),
+                             minDataValue: self.minData ?? .constant(nil),
+                             maxDataValue: self.maxData ?? .constant(nil),
                              showBackground: false
                         )
                         .offset(x: 30, y: 0)
