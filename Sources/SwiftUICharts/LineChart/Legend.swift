@@ -10,8 +10,8 @@ import SwiftUI
 
 struct Legend: View {
     @ObservedObject var data: ChartData
-    var min: Double?
-    var max: Double?
+    @Binding var min: Double?
+    @Binding var max: Double?
     @Binding var frame: CGRect
     @Binding var hideHorizontalLines: Bool
     @Environment(\.colorScheme) var colorScheme: ColorScheme
@@ -20,13 +20,13 @@ struct Legend: View {
     public init(data: ChartData,
                 frame: Binding<CGRect>,
                 hideHorizontalLines: Binding<Bool>,
-                min: Double? = nil,
-                max: Double? = nil) {
+                min: Binding<Double?> = nil,
+                max: Binding<Double?> = nil) {
         self.data = data
         self._frame = frame
         self._hideHorizontalLines = hideHorizontalLines
-        self.min = min
-        self.max = max
+        self._min = min
+        self._max = max
         print("min in legend: ", self.min ?? "no value")
         print("max in legend: ", self.max ?? "no value")
     }
