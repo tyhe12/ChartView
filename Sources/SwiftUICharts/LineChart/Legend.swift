@@ -10,16 +10,16 @@ import SwiftUI
 
 struct Legend: View {
     @ObservedObject var data: ChartData
-    @Binding var min: Double?
-    @Binding var max: Double?
+    var min: Double?
+    var max: Double?
     @Binding var frame: CGRect
     @Binding var hideHorizontalLines: Bool
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     let padding:CGFloat = 3
 
     public init(data: ChartData,
-                frame: CGRect,
-                hideHorizontalLines: Bool,
+                frame: Binding<CGRect>,
+                hideHorizontalLines: Binding<Bool>,
                 min: Double? = nil,
                 max: Double? = nil) {
         self.data = data
