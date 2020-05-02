@@ -96,13 +96,13 @@ struct Legend: View {
     }
     
     func getYLegend() -> [Double]? {
-        let points = self.data.onlyPoints()
+        // let points = self.data.onlyPoints()
         // guard let max = self.max ?? points.max() else { return nil }
         // guard let min = self.min ?? points.min() else { return nil }
         let max = self.max
         let min = self.min
         let step = Double(max - min)/4
-        return [min+step * 0, min+step * 1, min+step * 2, min+step * 3, min+step * 4]
+        return [0, 25, 50, 75, 100]
     }
 }
 
