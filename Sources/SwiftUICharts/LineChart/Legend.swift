@@ -20,8 +20,8 @@ struct Legend: View {
     public init(data: ChartData,
                 frame: Binding<CGRect>,
                 hideHorizontalLines: Binding<Bool>,
-                min: Binding<Double>? = .constant(nil),
-                max: Binding<Double>? = .constant(nil)) {
+                min: Binding<Double?> = .constant(nil),
+                max: Binding<Double?> = .constant(nil)) {
         self.data = data
         self._frame = frame
         self._hideHorizontalLines = hideHorizontalLines
