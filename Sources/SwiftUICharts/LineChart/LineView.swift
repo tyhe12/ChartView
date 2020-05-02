@@ -68,8 +68,8 @@ public struct LineView: View {
                              frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - 30, height: reader.frame(in: .local).height)),
                              touchLocation: self.$indicatorLocation,
                              showIndicator: self.$hideHorizontalLines,
-                             minDataValue: self.$minData ?? .constant(nil),
-                             maxDataValue: self.$maxData ?? .constant(nil),
+                             minDataValue: 0,
+                             maxDataValue: 100,
                              showBackground: false
                         )
                         .offset(x: 30, y: 0)
