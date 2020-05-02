@@ -24,16 +24,12 @@ public struct LineView: View {
     @State private var opacity:Double = 0
     @State private var currentDataNumber: Double = 0
     @State private var hideHorizontalLines: Bool = false
-    @State private var minData: Double?
-    @State private var maxData: Double?
     
     public init(data: [Double],
                 title: String? = nil,
                 legend: String? = nil,
                 style: ChartStyle = Styles.lineChartStyleOne,
-                valueSpecifier: String? = "%.1f", 
-                min: Double? = nil,
-                max: Double? = nil) {
+                valueSpecifier: String? = "%.1f") {
         
         self.data = ChartData(points: data)
         self.title = title
@@ -41,10 +37,6 @@ public struct LineView: View {
         self.style = style
         self.valueSpecifier = valueSpecifier!
         self.darkModeStyle = style.darkModeStyle != nil ? style.darkModeStyle! : Styles.lineViewDarkMode
-        self.minData = min
-        self.maxData = max
-        print("min in line: ", min ?? "no value")
-        print("max in line: ", max ?? "no value")
     }
     
     public var body: some View {
@@ -68,7 +60,7 @@ public struct LineView: View {
                             .foregroundColor(self.colorScheme == .dark ? self.darkModeStyle.backgroundColor : self.style.backgroundColor)
                         if(self.showLegend){
                             Legend(data: self.data,
-                                   frame: .constant(reader.frame(in: .local)), hideHorizontalLines: self.$hideHorizontalLines, min: self.$minData, max: self.$maxData)
+                                   frame: .constant(reader.frame(in: .local)), hideHorizontalLines: self.$hideHorizontalLines)
                                 .transition(.opacity)
                                 .animation(Animation.easeOut(duration: 1).delay(1))
                         }

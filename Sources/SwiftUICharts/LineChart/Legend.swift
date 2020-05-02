@@ -10,25 +10,21 @@ import SwiftUI
 
 struct Legend: View {
     @ObservedObject var data: ChartData
-    @Binding var min: Double?
-    @Binding var max: Double?
+    // @Binding var min: Double?
+    // @Binding var max: Double?
     @Binding var frame: CGRect
     @Binding var hideHorizontalLines: Bool
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     let padding:CGFloat = 3
+    let min = 0
+    let max = 100
 
     public init(data: ChartData,
                 frame: Binding<CGRect>,
-                hideHorizontalLines: Binding<Bool>,
-                min: Binding<Double?> = .constant(nil),
-                max: Binding<Double?> = .constant(nil)) {
+                hideHorizontalLines: Binding<Bool>) {
         self.data = data
         self._frame = frame
         self._hideHorizontalLines = hideHorizontalLines
-        self._min = min
-        self._max = max
-        print("min in legend: ", self.min ?? "no value")
-        print("max in legend: ", self.max ?? "no value")
     }
 
     var stepWidth: CGFloat {
@@ -39,7 +35,7 @@ struct Legend: View {
     }
     var stepHeight: CGFloat {
         let points = self.data.onlyPoints()
-        if let min = self.min ?? points.min(), let max = self.max ?? points.max(), min != max {
+        if let min = self.min, let max = self.max, min != max {
             if (min < 0){
                 return (frame.size.height-padding) / CGFloat(max - min)
             }else{
@@ -51,7 +47,7 @@ struct Legend: View {
     
     var minFloat: CGFloat {
         let points = self.data.onlyPoints()
-        return CGFloat(self.min ?? (points.min() ?? 0))
+        return CGFloat(self.min)
     }
     
     var body: some View {
@@ -99,8 +95,10 @@ struct Legend: View {
     
     func getYLegend() -> [Double]? {
         let points = self.data.onlyPoints()
-        guard let max = self.max ?? points.max() else { return nil }
-        guard let min = self.min ?? points.min() else { return nil }
+        // guard let max = self.max ?? points.max() else { return nil }
+        // guard let min = self.min ?? points.min() else { return nil }
+        guard let max = self.max
+        guard let min = self.min
         let step = Double(max - min)/4
         return [min+step * 0, min+step * 1, min+step * 2, min+step * 3, min+step * 4]
     }
