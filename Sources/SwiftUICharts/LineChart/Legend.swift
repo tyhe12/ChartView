@@ -27,6 +27,8 @@ struct Legend: View {
         self._hideHorizontalLines = hideHorizontalLines
         self.min = min
         self.max = max
+        print("min: ", self.min ?? "no value")
+        print("max: ", self.max ?? "no value")
     }
 
     var stepWidth: CGFloat {
@@ -97,7 +99,7 @@ struct Legend: View {
     
     func getYLegend() -> [Double]? {
         let points = self.data.onlyPoints()
-        guard let max = self.min ?? points.max() else { return nil }
+        guard let max = self.max ?? points.max() else { return nil }
         guard let min = self.min ?? points.min() else { return nil }
         let step = Double(max - min)/4
         return [min+step * 0, min+step * 1, min+step * 2, min+step * 3, min+step * 4]
