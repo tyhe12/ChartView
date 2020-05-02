@@ -15,8 +15,6 @@ public struct LineView: View {
     public var style: ChartStyle
     public var darkModeStyle: ChartStyle
     public var valueSpecifier:String
-    public var minData: Double?
-    public var maxData: Double?
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State private var showLegend = false
@@ -26,6 +24,8 @@ public struct LineView: View {
     @State private var opacity:Double = 0
     @State private var currentDataNumber: Double = 0
     @State private var hideHorizontalLines: Bool = false
+    @State private var minData: Double?
+    @State private var maxData: Double?
     
     public init(data: [Double],
                 title: String? = nil,
