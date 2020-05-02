@@ -15,8 +15,8 @@ public struct LineView: View {
     public var style: ChartStyle
     public var darkModeStyle: ChartStyle
     public var valueSpecifier:String
-    public var minData: Int?
-    public var maxData: Int?
+    public var minData: Double?
+    public var maxData: Double?
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State private var showLegend = false
@@ -32,8 +32,8 @@ public struct LineView: View {
                 legend: String? = nil,
                 style: ChartStyle = Styles.lineChartStyleOne,
                 valueSpecifier: String? = "%.1f", 
-                min: Int? = nil,
-                max: Int? = nil) {
+                min: Double? = nil,
+                max: Double? = nil) {
         
         self.data = ChartData(points: data)
         self.title = title
