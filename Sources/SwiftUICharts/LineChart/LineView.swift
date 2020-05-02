@@ -43,6 +43,8 @@ public struct LineView: View {
         self.darkModeStyle = style.darkModeStyle != nil ? style.darkModeStyle! : Styles.lineViewDarkMode
         self.minData = min
         self.maxData = max
+        print("min in line: ", min ?? "no value")
+        print("max in line: ", max ?? "no value")
     }
     
     public var body: some View {

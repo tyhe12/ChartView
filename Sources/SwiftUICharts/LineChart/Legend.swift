@@ -27,8 +27,8 @@ struct Legend: View {
         self._hideHorizontalLines = hideHorizontalLines
         self.min = min
         self.max = max
-        print("min: ", self.min ?? "no value")
-        print("max: ", self.max ?? "no value")
+        print("min in legend: ", self.min ?? "no value")
+        print("max in legend: ", self.max ?? "no value")
     }
 
     var stepWidth: CGFloat {
