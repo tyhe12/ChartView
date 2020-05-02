@@ -23,8 +23,8 @@ struct Legend: View {
                 min: Double? = nil,
                 max: Double? = nil) {
         self.data = data
-        self.frame = $frame
-        self.hideHorizontalLines = $hideHorizontalLines
+        self._frame = frame
+        self._hideHorizontalLines = hideHorizontalLines
         self.min = min
         self.max = max
     }
